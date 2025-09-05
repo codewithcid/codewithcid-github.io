@@ -3,267 +3,595 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[SIDHARDH S] - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Sidhardh S - Full Stack Developer specializing in AI/ML, React, Node.js, and modern web technologies">
+    <meta name="author" content="Sidhardh S">
+    
+    <title>Sidhardh S - Full Stack Developer | AI/ML Specialist</title>
+    
+    <!-- Enhanced Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<canvas class="fluid-canvas"></canvas>
-   <header>
-    <nav>
-        <div class="logo">
-            <a href="#">[SIDHARDH]</a>
-        </div>
-        <ul>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-</header>
-    <main>
-        <section id="about">
-            <h1>Hi, I'm [SIDHARDH]</h1>
-            <p>[A developer specializing in using modern technologies and frameworks to create magic.]</p>
+    <!-- Advanced Background System -->
+    <div class="background-container">
+        <canvas class="fluid-canvas" id="fluid-canvas"></canvas>
+        <div class="matrix-rain"></div>
+        <div class="code-grid"></div>
+        <div class="floating-binary"></div>
+        <div class="neural-network"></div>
+    </div>
+    
+    <!-- Advanced Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo-container">
+                <div class="logo-wrapper">
+                    <span class="logo-bracket animate-bracket">&lt;</span>
+                    <span class="logo-main" id="interactive-logo">
+                        <span class="logo-letter" data-letter="S">S</span>
+                        <span class="logo-letter" data-letter="I">I</span>
+                        <span class="logo-letter" data-letter="D">D</span>
+                        <span class="logo-letter" data-letter="H">H</span>
+                        <span class="logo-letter" data-letter="A">A</span>
+                        <span class="logo-letter" data-letter="R">R</span>
+                        <span class="logo-letter" data-letter="D">D</span>
+                        <span class="logo-letter" data-letter="H">H</span>
+                    </span>
+                    <span class="logo-bracket animate-bracket">/&gt;</span>
+                    <div class="logo-cursor">_</div>
+                </div>
+                <div class="logo-subtitle">Full Stack Developer</div>
+            </div>
             
-            <!-- Floating elements for visual interest -->
-            <div class="floating-elements">
-                <div class="float-element" style="top: 20%; left: 10%; animation-delay: 0s;">💻</div>
-                <div class="float-element" style="top: 60%; right: 15%; animation-delay: 2s;">🚀</div>
-                <div class="float-element" style="top: 30%; right: 8%; animation-delay: 4s;">⚡</div>
-                <div class="float-element" style="bottom: 30%; left: 20%; animation-delay: 6s;">🌟</div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#about" class="nav-link" data-text="About">
+                        <span class="nav-icon">👨‍💻</span>
+                        <span class="nav-text">About</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link" data-text="Projects">
+                        <span class="nav-icon">🚀</span>
+                        <span class="nav-text">Projects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link" data-text="Skills">
+                        <span class="nav-icon">⚡</span>
+                        <span class="nav-text">Skills</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link" data-text="Contact">
+                        <span class="nav-icon">📧</span>
+                        <span class="nav-text">Contact</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Enhanced Hero Section -->
+        <section id="about" class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <div class="hero-greeting">
+                            <span class="greeting-text">Hello World! 👋</span>
+                        </div>
+                        <h1 class="hero-title">
+                            <span class="title-line">I'm <span class="highlight-text">Sidhardh</span></span>
+                            <span class="title-line typing-text" id="typing-text">Full Stack Developer</span>
+                        </h1>
+                        <p class="hero-description">
+                            Passionate about creating innovative solutions with <span class="tech-highlight">AI/ML</span>, 
+                            <span class="tech-highlight">React</span>, and <span class="tech-highlight">Node.js</span>. 
+                            Turning complex problems into elegant code.
+                        </p>
+                        
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">50+</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">3+</div>
+                                <div class="stat-label">Years</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">∞</div>
+                                <div class="stat-label">Coffee</div>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-actions">
+                            <a href="#projects" class="cta-primary">
+                                <span class="btn-text">View My Work</span>
+                                <span class="btn-icon">→</span>
+                            </a>
+                            <a href="#contact" class="cta-secondary">
+                                <span class="btn-text">Let's Connect</span>
+                                <span class="btn-icon">💬</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-visual">
+                        <div class="code-editor-mockup">
+                            <div class="editor-header">
+                                <div class="editor-controls">
+                                    <span class="control-btn close"></span>
+                                    <span class="control-btn minimize"></span>
+                                    <span class="control-btn maximize"></span>
+                                </div>
+                                <div class="editor-title">portfolio.js</div>
+                            </div>
+                            <div class="editor-content">
+                                <div class="code-line">
+                                    <span class="line-number">1</span>
+                                    <span class="code-text">
+                                        <span class="keyword">const</span> 
+                                        <span class="variable">developer</span> = {
+                                    </span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="line-number">2</span>
+                                    <span class="code-text">
+                                        &nbsp;&nbsp;<span class="property">name</span>: 
+                                        <span class="string">'Sidhardh'</span>,
+                                    </span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="line-number">3</span>
+                                    <span class="code-text">
+                                        &nbsp;&nbsp;<span class="property">skills</span>: 
+                                        [<span class="string">'React'</span>, <span class="string">'Node.js'</span>, <span class="string">'AI/ML'</span>],
+                                    </span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="line-number">4</span>
+                                    <span class="code-text">
+                                        &nbsp;&nbsp;<span class="property">passion</span>: 
+                                        <span class="string">'Creating Amazing Things'</span>
+                                    </span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="line-number">5</span>
+                                    <span class="code-text">};</span>
+                                </div>
+                                <div class="code-line active-line">
+                                    <span class="line-number">6</span>
+                                    <span class="code-text">
+                                        <span class="keyword">console</span>.<span class="method">log</span>(<span class="string">'Ready to innovate!'</span>);
+                                        <span class="cursor-blink">|</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Enhanced Coding Elements -->
+                        <div class="floating-code-elements">
+                            <!-- Terminal Windows -->
+                            <div class="code-element terminal-window" style="top: 10%; right: 20%;" data-content="npm run dev">
+                                <div class="terminal-header">
+                                    <span class="terminal-dot red"></span>
+                                    <span class="terminal-dot yellow"></span>
+                                    <span class="terminal-dot green"></span>
+                                </div>
+                                <div class="terminal-body">$ npm run dev</div>
+                            </div>
+                            
+                            <!-- Code Snippets -->
+                            <div class="code-element code-snippet" style="top: 60%; left: 10%;" data-lang="js">
+                                <div class="snippet-header">JavaScript</div>
+                                <div class="snippet-body">const magic = () => code;</div>
+                            </div>
+                            
+                            <!-- Git Commands -->
+                            <div class="code-element git-badge" style="bottom: 30%; right: 10%;">
+                                <span class="git-icon">🔀</span>
+                                <span class="git-text">git commit -m "feat: awesome update"</span>
+                            </div>
+                            
+                            <!-- API Calls -->
+                            <div class="code-element api-call" style="top: 40%; left: 15%;">
+                                <div class="api-method">GET</div>
+                                <div class="api-endpoint">/api/skills</div>
+                                <div class="api-status">200 OK</div>
+                            </div>
+                            
+                            <!-- Database Icons -->
+                            <div class="code-element db-icon" style="bottom: 40%; left: 20%;">
+                                <span class="db-symbol">🗄️</span>
+                                <span class="db-text">MongoDB</span>
+                            </div>
+                            
+                            <!-- React Components -->
+                            <div class="code-element react-component" style="top: 70%; right: 30%;">
+                                <div class="component-tag">&lt;Developer /&gt;</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="scroll-indicator">
+                    <div class="scroll-text">Scroll to explore</div>
+                    <div class="scroll-arrow"></div>
+                </div>
             </div>
         </section>
-        
-        <section id="projects">
-    <h2>My Projects</h2>
-    <div class="project-grid">
-        
-        <div class="project-card hidden">
-            <div class="project-header">
-                <h3>MERISPHERE</h3>
-                <div class="project-status">🚀 Live</div>
-            </div>
-            <p>Gamify the whole world and earn money and fame in the process. An innovative platform that transforms everyday activities into engaging game experiences.</p>
-            <div class="tech-stack">
-                <span>HTML & CSS</span>
-                <span>JavaScript</span>
-                <span>React</span>
-                <span>Gamification</span>
-            </div>
-            <div class="project-links">
-                <a href="#" target="_blank" class="primary-link">
-                    <span>🔗</span> View Live
-                </a>
-                <a href="#" target="_blank" class="secondary-link">
-                    <span>📂</span> Source Code
-                </a>
-            </div>
-        </div>
-       <div class="project-card hidden">
-            <div class="project-header">
-                <h3>MELLOW</h3>
-                <div class="project-status">🔬 Beta</div>
-            </div>
-            <p>A Cloud Based Health Record with AI Integration, biometric authentication and more. Revolutionary healthcare technology that could transform the entire health sector upon implementation.</p>
-            <div class="tech-stack">
-                <span>Node.js</span>
-                <span>Express</span>
-                <span>MongoDB</span>
-                <span>AI/ML</span>
-                <span>Biometrics</span>
-            </div>
-             <div class="project-links">
-                <a href="#" target="_blank" class="primary-link">
-                    <span>🔗</span> View Live
-                </a>
-                <a href="#" target="_blank" class="secondary-link">
-                    <span>📂</span> Source Code
-                </a>
-            </div>
-        </div>
-        
-        <!-- Additional project placeholder -->
-        <div class="project-card hidden coming-soon">
-            <div class="project-header">
-                <h3>Coming Soon</h3>
-                <div class="project-status">⏳ In Development</div>
-            </div>
-            <p>Exciting new project in development. Stay tuned for something amazing that will push the boundaries of web development.</p>
-            <div class="tech-stack">
-                <span>Next.js</span>
-                <span>TypeScript</span>
-                <span>AI</span>
-                <span>WebGL</span>
-            </div>
-            <div class="project-links">
-                <a href="#" class="disabled-link">
-                    <span>⏱️</span> Coming Soon
-                </a>
-            </div>
-        </div>
-        </div>
-</section>
 
-<section id="skills">
-    <h2>Skills & Technologies</h2>
-    <div class="skills-categories">
-        <div class="skill-category hidden">
-            <h3>Frontend</h3>
-            <div class="skills-list">
-                <span><i class="devicon-html5-plain colored"></i> HTML5</span>
-                <span><i class="devicon-css3-plain colored"></i> CSS3</span>
-                <span><i class="devicon-javascript-plain colored"></i> JavaScript</span>
-                <span><i class="devicon-react-original colored"></i> React</span>
-            </div>
-        </div>
-        
-        <div class="skill-category hidden">
-            <h3>Backend</h3>
-            <div class="skills-list">
-                <span><i class="devicon-nodejs-plain colored"></i> Node.js</span>
-                <span><i class="devicon-python-plain colored"></i> Python</span>
-                <span><i class="devicon-postgresql-plain colored"></i> SQL</span>
-                <span><i class="devicon-mongodb-plain colored"></i> MongoDB</span>
-            </div>
-        </div>
-        
-        <div class="skill-category hidden">
-            <h3>Tools & Others</h3>
-            <div class="skills-list">
-                <span><i class="devicon-git-plain colored"></i> Git & GitHub</span>
-                <span><i class="devicon-figma-plain colored"></i> UI/UX Design</span>
-                <span><i class="devicon-docker-plain colored"></i> DevOps</span>
-                <span>🤖 AI/ML</span>
-            </div>
-        </div>
-    </div>
-</section>
+        <!-- Enhanced Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="title-bracket">&lt;</span>
+                        Featured Projects
+                        <span class="title-bracket">/&gt;</span>
+                    </h2>
+                    <p class="section-subtitle">Building the future, one line of code at a time</p>
+                </div>
+                
+                <div class="projects-grid">
+                    <article class="project-card featured" data-project="merisphere">
+                        <div class="project-number">01</div>
+                        <div class="project-image">
+                            <div class="project-tech-stack">
+                                <span class="tech-item">React</span>
+                                <span class="tech-item">Node.js</span>
+                                <span class="tech-item">MongoDB</span>
+                            </div>
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link demo">
+                                        <span class="link-icon">🔗</span>
+                                        <span class="link-text">Live Demo</span>
+                                    </a>
+                                    <a href="#" class="project-link code">
+                                        <span class="link-icon">📂</span>
+                                        <span class="link-text">Source Code</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <h3 class="project-title">MERISPHERE</h3>
+                                <div class="project-status live">
+                                    <span class="status-dot"></span>
+                                    <span class="status-text">Live</span>
+                                </div>
+                            </div>
+                            <p class="project-description">
+                                Revolutionary gamification platform that transforms everyday activities into engaging experiences. 
+                                Features real-time multiplayer interactions and AI-powered reward systems.
+                            </p>
+                            <div class="project-features">
+                                <span class="feature-tag">🎮 Gamification</span>
+                                <span class="feature-tag">🤖 AI Integration</span>
+                                <span class="feature-tag">⚡ Real-time</span>
+                            </div>
+                        </div>
+                    </article>
 
-        <section id="contact">
-            <h2>Get In Touch</h2>
-            <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
-            <div class="contact-methods">
-                <a href="mailto:cidcodes@gmail.com" class="cta-button">
-                    <span>📧</span> Email Me
-                </a>
-                <a href="#" class="cta-button secondary">
-                    <span>💼</span> LinkedIn
-                </a>
+                    <article class="project-card" data-project="mellow">
+                        <div class="project-number">02</div>
+                        <div class="project-image">
+                            <div class="project-tech-stack">
+                                <span class="tech-item">Python</span>
+                                <span class="tech-item">FastAPI</span>
+                                <span class="tech-item">ML</span>
+                            </div>
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link demo">
+                                        <span class="link-icon">🔗</span>
+                                        <span class="link-text">Beta Version</span>
+                                    </a>
+                                    <a href="#" class="project-link code">
+                                        <span class="link-icon">📂</span>
+                                        <span class="link-text">Documentation</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <h3 class="project-title">MELLOW</h3>
+                                <div class="project-status beta">
+                                    <span class="status-dot"></span>
+                                    <span class="status-text">Beta</span>
+                                </div>
+                            </div>
+                            <p class="project-description">
+                                Next-generation health record system with AI diagnostics, biometric authentication, 
+                                and blockchain security. Currently in beta with 1000+ active users.
+                            </p>
+                            <div class="project-features">
+                                <span class="feature-tag">🏥 Healthcare</span>
+                                <span class="feature-tag">🔒 Blockchain</span>
+                                <span class="feature-tag">🧬 Biometrics</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card coming-soon" data-project="next">
+                        <div class="project-number">03</div>
+                        <div class="project-image">
+                            <div class="project-tech-stack">
+                                <span class="tech-item">Next.js</span>
+                                <span class="tech-item">Three.js</span>
+                                <span class="tech-item">WebGL</span>
+                            </div>
+                            <div class="project-overlay">
+                                <div class="coming-soon-content">
+                                    <div class="loading-animation">
+                                        <div class="loading-dot"></div>
+                                        <div class="loading-dot"></div>
+                                        <div class="loading-dot"></div>
+                                    </div>
+                                    <div class="coming-soon-text">Coming Soon</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <h3 class="project-title">NEURAL CANVAS</h3>
+                                <div class="project-status dev">
+                                    <span class="status-dot"></span>
+                                    <span class="status-text">In Development</span>
+                                </div>
+                            </div>
+                            <p class="project-description">
+                                Revolutionary 3D visualization platform combining neural networks with interactive 
+                                canvas technology. Will redefine how we interact with AI-generated content.
+                            </p>
+                            <div class="project-features">
+                                <span class="feature-tag">🧠 Neural Networks</span>
+                                <span class="feature-tag">🎨 3D Graphics</span>
+                                <span class="feature-tag">⚡ WebGL</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Skills Section -->
+        <section id="skills" class="skills-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="title-bracket">function</span>
+                        Skills()
+                        <span class="title-bracket">{ }</span>
+                    </h2>
+                    <p class="section-subtitle">My technical arsenal for building amazing things</p>
+                </div>
+                
+                <div class="skills-grid">
+                    <div class="skill-category frontend">
+                        <div class="category-header">
+                            <div class="category-icon">🎨</div>
+                            <h3 class="category-title">Frontend</h3>
+                            <div class="category-progress">
+                                <div class="progress-bar" style="--progress: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skills-list">
+                            <div class="skill-item" data-skill="react">
+                                <div class="skill-icon"><i class="devicon-react-original colored"></i></div>
+                                <div class="skill-name">React</div>
+                                <div class="skill-level">Expert</div>
+                            </div>
+                            <div class="skill-item" data-skill="next">
+                                <div class="skill-icon"><i class="devicon-nextjs-original"></i></div>
+                                <div class="skill-name">Next.js</div>
+                                <div class="skill-level">Advanced</div>
+                            </div>
+                            <div class="skill-item" data-skill="typescript">
+                                <div class="skill-icon"><i class="devicon-typescript-plain colored"></i></div>
+                                <div class="skill-name">TypeScript</div>
+                                <div class="skill-level">Expert</div>
+                            </div>
+                            <div class="skill-item" data-skill="javascript">
+                                <div class="skill-icon"><i class="devicon-javascript-plain colored"></i></div>
+                                <div class="skill-name">JavaScript</div>
+                                <div class="skill-level">Expert</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category backend">
+                        <div class="category-header">
+                            <div class="category-icon">⚙️</div>
+                            <h3 class="category-title">Backend</h3>
+                            <div class="category-progress">
+                                <div class="progress-bar" style="--progress: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skills-list">
+                            <div class="skill-item" data-skill="nodejs">
+                                <div class="skill-icon"><i class="devicon-nodejs-plain colored"></i></div>
+                                <div class="skill-name">Node.js</div>
+                                <div class="skill-level">Expert</div>
+                            </div>
+                            <div class="skill-item" data-skill="python">
+                                <div class="skill-icon"><i class="devicon-python-plain colored"></i></div>
+                                <div class="skill-name">Python</div>
+                                <div class="skill-level">Advanced</div>
+                            </div>
+                            <div class="skill-item" data-skill="mongodb">
+                                <div class="skill-icon"><i class="devicon-mongodb-plain colored"></i></div>
+                                <div class="skill-name">MongoDB</div>
+                                <div class="skill-level">Advanced</div>
+                            </div>
+                            <div class="skill-item" data-skill="postgresql">
+                                <div class="skill-icon"><i class="devicon-postgresql-plain colored"></i></div>
+                                <div class="skill-name">PostgreSQL</div>
+                                <div class="skill-level">Intermediate</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category tools">
+                        <div class="category-header">
+                            <div class="category-icon">🛠️</div>
+                            <h3 class="category-title">Tools & AI</h3>
+                            <div class="category-progress">
+                                <div class="progress-bar" style="--progress: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skills-list">
+                            <div class="skill-item" data-skill="ai">
+                                <div class="skill-icon">🤖</div>
+                                <div class="skill-name">AI/ML</div>
+                                <div class="skill-level">Advanced</div>
+                            </div>
+                            <div class="skill-item" data-skill="docker">
+                                <div class="skill-icon"><i class="devicon-docker-plain colored"></i></div>
+                                <div class="skill-name">Docker</div>
+                                <div class="skill-level">Intermediate</div>
+                            </div>
+                            <div class="skill-item" data-skill="git">
+                                <div class="skill-icon"><i class="devicon-git-plain colored"></i></div>
+                                <div class="skill-name">Git</div>
+                                <div class="skill-level">Expert</div>
+                            </div>
+                            <div class="skill-item" data-skill="figma">
+                                <div class="skill-icon"><i class="devicon-figma-plain colored"></i></div>
+                                <div class="skill-name">Figma</div>
+                                <div class="skill-level">Advanced</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="title-bracket">await</span>
+                        Connect()
+                        <span class="title-bracket">;</span>
+                    </h2>
+                    <p class="section-subtitle">Let's build something amazing together</p>
+                </div>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-card email">
+                            <div class="card-icon">📧</div>
+                            <div class="card-content">
+                                <h4 class="card-title">Email</h4>
+                                <a href="mailto:cidcodes@gmail.com" class="card-link">cidcodes@gmail.com</a>
+                                <div class="card-status">
+                                    <span class="status-dot online"></span>
+                                    <span class="status-text">Usually responds in 24h</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card linkedin">
+                            <div class="card-icon">💼</div>
+                            <div class="card-content">
+                                <h4 class="card-title">LinkedIn</h4>
+                                <a href="#" class="card-link">Connect with me</a>
+                                <div class="card-status">
+                                    <span class="status-dot online"></span>
+                                    <span class="status-text">Active daily</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card github">
+                            <div class="card-icon">🐙</div>
+                            <div class="card-content">
+                                <h4 class="card-title">GitHub</h4>
+                                <a href="#" class="card-link">Check my repositories</a>
+                                <div class="card-status">
+                                    <span class="status-dot online"></span>
+                                    <span class="status-text">Commits daily</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-cta">
+                        <div class="cta-content">
+                            <h3 class="cta-title">Ready to start a project?</h3>
+                            <p class="cta-description">
+                                Whether you have a groundbreaking idea or need help bringing your vision to life, 
+                                I'm here to help you succeed.
+                            </p>
+                            <a href="mailto:cidcodes@gmail.com" class="cta-button primary large">
+                                <span class="btn-text">Start Conversation</span>
+                                <span class="btn-icon">🚀</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
-    <footer>
-    <div class="social-links">
-        <a href="#" target="_blank">
-            <span>🐙</span> GitHub
-        </a>
-        <a href="#" target="_blank">
-            <span>💼</span> LinkedIn
-        </a>
-        <a href="#" target="_blank">
-            <span>🐦</span> Twitter
-        </a>
-    </div>
-    <p>&copy; 2025 [SIDHARDH S]. Crafted with ❤️ and lots of ☕</p>
-</footer>
-    
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <span class="logo-bracket">&lt;</span>
+                        <span class="logo-text">SIDHARDH</span>
+                        <span class="logo-bracket">/&gt;</span>
+                    </div>
+                    <p class="footer-tagline">Crafting digital experiences with code and creativity</p>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="social-links">
+                        <a href="#" class="social-link github">
+                            <span class="social-icon">🐙</span>
+                            <span class="social-text">GitHub</span>
+                        </a>
+                        <a href="#" class="social-link linkedin">
+                            <span class="social-icon">💼</span>
+                            <span class="social-text">LinkedIn</span>
+                        </a>
+                        <a href="#" class="social-link twitter">
+                            <span class="social-icon">🐦</span>
+                            <span class="social-text">Twitter</span>
+                        </a>
+                    </div>
+                    
+                    <div class="footer-bottom">
+                        <p>&copy; 2025 Sidhardh S. Made with <span class="heart">❤️</span> and lots of <span class="coffee">☕</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script src="fluid.js"></script>
     <script src="script.js"></script>
-    
-    <style>
-        /* Additional styles for enhanced elements */
-        .floating-elements {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .float-element {
-            position: absolute;
-            font-size: 2rem;
-            opacity: 0.7;
-            animation: floatAnimation 8s ease-in-out infinite;
-        }
-        
-        @keyframes floatAnimation {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .project-status {
-            background: linear-gradient(135deg, #00d4ff, #ff006e);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .coming-soon {
-            opacity: 0.8;
-            border: 2px dashed var(--border-color);
-        }
-        
-        .disabled-link {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
-        .skills-categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .skill-category {
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-        }
-        
-        .skill-category h3 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-            text-align: center;
-        }
-        
-        .contact-methods {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .cta-button.secondary {
-            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
-        }
-        
-        .primary-link {
-            background: var(--primary-color) !important;
-            color: var(--bg-dark) !important;
-        }
-        
-        .secondary-link {
-            background: transparent !important;
-            border-color: var(--primary-color) !important;
-            color: var(--primary-color) !important;
-        }
-    </style>
 </body>
 </html>
