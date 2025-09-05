@@ -6,7 +6,7 @@
     <meta name="description" content="Sidhardh S - Full Stack Developer specializing in AI/ML, React, Node.js, and modern web technologies">
     <meta name="author" content="Sidhardh S">
     
-    <title>Sidhardh S - Full Stack Developer | AI/ML Specialist</title>
+    <title>Sidhardh S - Interactive Developer Portfolio</title>
     
     <!-- Enhanced Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,23 +16,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <!-- Advanced Background System -->
+<body class="desktop-optimized">
+    <!-- Cursor Follower (Desktop Only) -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+    
+    <!-- Background System -->
     <div class="background-container">
         <canvas class="fluid-canvas" id="fluid-canvas"></canvas>
         <div class="matrix-rain"></div>
+        <div class="particle-system" id="particles"></div>
         <div class="code-grid"></div>
-        <div class="floating-binary"></div>
         <div class="neural-network"></div>
     </div>
     
-    <!-- Advanced Header -->
-    <header class="header">
+    <!-- Header -->
+    <header class="header" id="header">
         <nav class="navbar">
             <div class="logo-container">
-                <div class="logo-wrapper">
+                <div class="logo-wrapper" id="interactive-logo">
                     <span class="logo-bracket animate-bracket">&lt;</span>
-                    <span class="logo-main" id="interactive-logo">
+                    <div class="logo-main">
                         <span class="logo-letter" data-letter="S">S</span>
                         <span class="logo-letter" data-letter="I">I</span>
                         <span class="logo-letter" data-letter="D">D</span>
@@ -41,7 +45,7 @@
                         <span class="logo-letter" data-letter="R">R</span>
                         <span class="logo-letter" data-letter="D">D</span>
                         <span class="logo-letter" data-letter="H">H</span>
-                    </span>
+                    </div>
                     <span class="logo-bracket animate-bracket">/&gt;</span>
                     <div class="logo-cursor">_</div>
                 </div>
@@ -53,29 +57,33 @@
                     <a href="#about" class="nav-link" data-text="About">
                         <span class="nav-icon">👨‍💻</span>
                         <span class="nav-text">About</span>
+                        <div class="nav-hover-effect"></div>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#projects" class="nav-link" data-text="Projects">
                         <span class="nav-icon">🚀</span>
                         <span class="nav-text">Projects</span>
+                        <div class="nav-hover-effect"></div>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#skills" class="nav-link" data-text="Skills">
                         <span class="nav-icon">⚡</span>
                         <span class="nav-text">Skills</span>
+                        <div class="nav-hover-effect"></div>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#contact" class="nav-link" data-text="Contact">
                         <span class="nav-icon">📧</span>
                         <span class="nav-text">Contact</span>
+                        <div class="nav-hover-effect"></div>
                     </a>
                 </li>
             </ul>
             
-            <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -85,62 +93,71 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Enhanced Hero Section -->
+        <!-- Hero Section -->
         <section id="about" class="hero-section">
             <div class="hero-container">
                 <div class="hero-content">
                     <div class="hero-text">
                         <div class="hero-greeting">
-                            <span class="greeting-text">Hello World! 👋</span>
+                            <span class="greeting-text">console.log("Hello World!"); 👋</span>
                         </div>
                         <h1 class="hero-title">
-                            <span class="title-line">I'm <span class="highlight-text">Sidhardh</span></span>
-                            <span class="title-line typing-text" id="typing-text">Full Stack Developer</span>
+                            <span class="title-line">I'm <span class="highlight-text" data-text="Sidhardh">Sidhardh</span></span>
+                            <span class="title-line typing-container">
+                                <span class="typing-text" id="typing-text">Full Stack Developer</span>
+                                <span class="cursor-typing">|</span>
+                            </span>
                         </h1>
                         <p class="hero-description">
                             Passionate about creating innovative solutions with <span class="tech-highlight">AI/ML</span>, 
                             <span class="tech-highlight">React</span>, and <span class="tech-highlight">Node.js</span>. 
-                            Turning complex problems into elegant code.
+                            Transforming complex problems into elegant, scalable code.
                         </p>
                         
                         <div class="hero-stats">
-                            <div class="stat-item">
-                                <div class="stat-number">50+</div>
+                            <div class="stat-item" data-stat="projects">
+                                <div class="stat-number" data-target="50">50+</div>
                                 <div class="stat-label">Projects</div>
                             </div>
-                            <div class="stat-item">
-                                <div class="stat-number">3+</div>
+                            <div class="stat-item" data-stat="experience">
+                                <div class="stat-number" data-target="3">3+</div>
                                 <div class="stat-label">Years</div>
                             </div>
-                            <div class="stat-item">
+                            <div class="stat-item" data-stat="coffee">
                                 <div class="stat-number">∞</div>
                                 <div class="stat-label">Coffee</div>
                             </div>
                         </div>
                         
                         <div class="hero-actions">
-                            <a href="#projects" class="cta-primary">
+                            <a href="#projects" class="cta-primary" data-magnetic>
                                 <span class="btn-text">View My Work</span>
                                 <span class="btn-icon">→</span>
+                                <div class="btn-ripple"></div>
                             </a>
-                            <a href="#contact" class="cta-secondary">
+                            <a href="#contact" class="cta-secondary" data-magnetic>
                                 <span class="btn-text">Let's Connect</span>
                                 <span class="btn-icon">💬</span>
+                                <div class="btn-ripple"></div>
                             </a>
                         </div>
                     </div>
                     
                     <div class="hero-visual">
-                        <div class="code-editor-mockup">
+                        <!-- Interactive Code Editor -->
+                        <div class="code-editor-mockup" data-tilt>
                             <div class="editor-header">
                                 <div class="editor-controls">
-                                    <span class="control-btn close"></span>
-                                    <span class="control-btn minimize"></span>
-                                    <span class="control-btn maximize"></span>
+                                    <span class="control-btn close" data-action="close"></span>
+                                    <span class="control-btn minimize" data-action="minimize"></span>
+                                    <span class="control-btn maximize" data-action="maximize"></span>
                                 </div>
-                                <div class="editor-title">portfolio.js</div>
+                                <div class="editor-tabs">
+                                    <div class="tab active">portfolio.js</div>
+                                    <div class="tab">skills.json</div>
+                                </div>
                             </div>
-                            <div class="editor-content">
+                            <div class="editor-content" id="code-content">
                                 <div class="code-line">
                                     <span class="line-number">1</span>
                                     <span class="code-text">
@@ -152,7 +169,7 @@
                                     <span class="line-number">2</span>
                                     <span class="code-text">
                                         &nbsp;&nbsp;<span class="property">name</span>: 
-                                        <span class="string">'Sidhardh'</span>,
+                                        <span class="string">'Sidhardh S'</span>,
                                     </span>
                                 </div>
                                 <div class="code-line">
@@ -165,16 +182,23 @@
                                 <div class="code-line">
                                     <span class="line-number">4</span>
                                     <span class="code-text">
+                                        &nbsp;&nbsp;<span class="property">experience</span>: 
+                                        <span class="number">3</span>,
+                                    </span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="line-number">5</span>
+                                    <span class="code-text">
                                         &nbsp;&nbsp;<span class="property">passion</span>: 
                                         <span class="string">'Creating Amazing Things'</span>
                                     </span>
                                 </div>
                                 <div class="code-line">
-                                    <span class="line-number">5</span>
+                                    <span class="line-number">6</span>
                                     <span class="code-text">};</span>
                                 </div>
                                 <div class="code-line active-line">
-                                    <span class="line-number">6</span>
+                                    <span class="line-number">7</span>
                                     <span class="code-text">
                                         <span class="keyword">console</span>.<span class="method">log</span>(<span class="string">'Ready to innovate!'</span>);
                                         <span class="cursor-blink">|</span>
@@ -183,88 +207,95 @@
                             </div>
                         </div>
                         
-                        <!-- Enhanced Coding Elements -->
+                        <!-- Floating Code Elements -->
                         <div class="floating-code-elements">
-                            <!-- Terminal Windows -->
-                            <div class="code-element terminal-window" style="top: 10%; right: 20%;" data-content="npm run dev">
+                            <div class="code-element terminal-window" data-float-speed="2">
                                 <div class="terminal-header">
-                                    <span class="terminal-dot red"></span>
-                                    <span class="terminal-dot yellow"></span>
-                                    <span class="terminal-dot green"></span>
+                                    <div class="terminal-dots">
+                                        <span class="dot red"></span>
+                                        <span class="dot yellow"></span>
+                                        <span class="dot green"></span>
+                                    </div>
+                                    <div class="terminal-title">Terminal</div>
                                 </div>
-                                <div class="terminal-body">$ npm run dev</div>
+                                <div class="terminal-content">
+                                    <div class="terminal-line">$ npm run dev</div>
+                                    <div class="terminal-line success">✅ Server running on localhost:3000</div>
+                                </div>
                             </div>
                             
-                            <!-- Code Snippets -->
-                            <div class="code-element code-snippet" style="top: 60%; left: 10%;" data-lang="js">
-                                <div class="snippet-header">JavaScript</div>
-                                <div class="snippet-body">const magic = () => code;</div>
+                            <div class="code-element api-response" data-float-speed="3">
+                                <div class="api-header">
+                                    <span class="method get">GET</span>
+                                    <span class="endpoint">/api/skills</span>
+                                </div>
+                                <div class="api-status">
+                                    <span class="status-code">200</span>
+                                    <span class="status-text">OK</span>
+                                </div>
                             </div>
                             
-                            <!-- Git Commands -->
-                            <div class="code-element git-badge" style="bottom: 30%; right: 10%;">
-                                <span class="git-icon">🔀</span>
-                                <span class="git-text">git commit -m "feat: awesome update"</span>
+                            <div class="code-element git-commit" data-float-speed="1.5">
+                                <div class="git-icon">🔀</div>
+                                <div class="git-text">
+                                    <div class="commit-msg">feat: awesome portfolio update</div>
+                                    <div class="commit-hash">#a1b2c3d</div>
+                                </div>
                             </div>
                             
-                            <!-- API Calls -->
-                            <div class="code-element api-call" style="top: 40%; left: 15%;">
-                                <div class="api-method">GET</div>
-                                <div class="api-endpoint">/api/skills</div>
-                                <div class="api-status">200 OK</div>
+                            <div class="code-element react-component" data-float-speed="2.5">
+                                <div class="component-brackets">&lt;</div>
+                                <div class="component-name">Developer</div>
+                                <div class="component-brackets">/&gt;</div>
                             </div>
                             
-                            <!-- Database Icons -->
-                            <div class="code-element db-icon" style="bottom: 40%; left: 20%;">
-                                <span class="db-symbol">🗄️</span>
-                                <span class="db-text">MongoDB</span>
-                            </div>
-                            
-                            <!-- React Components -->
-                            <div class="code-element react-component" style="top: 70%; right: 30%;">
-                                <div class="component-tag">&lt;Developer /&gt;</div>
+                            <div class="code-element database-query" data-float-speed="1.8">
+                                <div class="db-icon">🗄️</div>
+                                <div class="query-text">SELECT * FROM skills WHERE level = 'expert'</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="scroll-indicator">
+                <div class="scroll-indicator" id="scroll-indicator">
                     <div class="scroll-text">Scroll to explore</div>
-                    <div class="scroll-arrow"></div>
+                    <div class="scroll-mouse">
+                        <div class="scroll-wheel"></div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Enhanced Projects Section -->
+        <!-- Projects Section -->
         <section id="projects" class="projects-section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">
+                    <h2 class="section-title" data-reveal>
                         <span class="title-bracket">&lt;</span>
-                        Featured Projects
+                        <span class="title-text">Featured Projects</span>
                         <span class="title-bracket">/&gt;</span>
                     </h2>
-                    <p class="section-subtitle">Building the future, one line of code at a time</p>
+                    <p class="section-subtitle" data-reveal>Building the future, one commit at a time</p>
                 </div>
                 
                 <div class="projects-grid">
-                    <article class="project-card featured" data-project="merisphere">
+                    <article class="project-card featured" data-project="1" data-reveal data-tilt>
                         <div class="project-number">01</div>
                         <div class="project-image">
                             <div class="project-tech-stack">
-                                <span class="tech-item">React</span>
-                                <span class="tech-item">Node.js</span>
-                                <span class="tech-item">MongoDB</span>
+                                <span class="tech-badge react">React</span>
+                                <span class="tech-badge node">Node.js</span>
+                                <span class="tech-badge mongo">MongoDB</span>
                             </div>
                             <div class="project-overlay">
                                 <div class="project-links">
-                                    <a href="#" class="project-link demo">
+                                    <a href="#" class="project-link demo" data-magnetic>
                                         <span class="link-icon">🔗</span>
                                         <span class="link-text">Live Demo</span>
                                     </a>
-                                    <a href="#" class="project-link code">
+                                    <a href="#" class="project-link code" data-magnetic>
                                         <span class="link-icon">📂</span>
-                                        <span class="link-text">Source Code</span>
+                                        <span class="link-text">Source</span>
                                     </a>
                                 </div>
                             </div>
@@ -273,39 +304,40 @@
                             <div class="project-header">
                                 <h3 class="project-title">MERISPHERE</h3>
                                 <div class="project-status live">
-                                    <span class="status-dot"></span>
+                                    <div class="status-indicator"></div>
                                     <span class="status-text">Live</span>
                                 </div>
                             </div>
                             <p class="project-description">
-                                Revolutionary gamification platform that transforms everyday activities into engaging experiences. 
+                                Revolutionary gamification platform transforming everyday activities into engaging experiences. 
                                 Features real-time multiplayer interactions and AI-powered reward systems.
                             </p>
                             <div class="project-features">
-                                <span class="feature-tag">🎮 Gamification</span>
-                                <span class="feature-tag">🤖 AI Integration</span>
-                                <span class="feature-tag">⚡ Real-time</span>
+                                <div class="feature-tag">🎮 Gamification Engine</div>
+                                <div class="feature-tag">🤖 AI Integration</div>
+                                <div class="feature-tag">⚡ Real-time Sync</div>
+                                <div class="feature-tag">📱 Cross-platform</div>
                             </div>
                         </div>
                     </article>
 
-                    <article class="project-card" data-project="mellow">
+                    <article class="project-card" data-project="2" data-reveal data-tilt>
                         <div class="project-number">02</div>
                         <div class="project-image">
                             <div class="project-tech-stack">
-                                <span class="tech-item">Python</span>
-                                <span class="tech-item">FastAPI</span>
-                                <span class="tech-item">ML</span>
+                                <span class="tech-badge python">Python</span>
+                                <span class="tech-badge fastapi">FastAPI</span>
+                                <span class="tech-badge ml">AI/ML</span>
                             </div>
                             <div class="project-overlay">
                                 <div class="project-links">
-                                    <a href="#" class="project-link demo">
+                                    <a href="#" class="project-link demo" data-magnetic>
                                         <span class="link-icon">🔗</span>
-                                        <span class="link-text">Beta Version</span>
+                                        <span class="link-text">Beta Demo</span>
                                     </a>
-                                    <a href="#" class="project-link code">
+                                    <a href="#" class="project-link code" data-magnetic>
                                         <span class="link-icon">📂</span>
-                                        <span class="link-text">Documentation</span>
+                                        <span class="link-text">Docs</span>
                                     </a>
                                 </div>
                             </div>
@@ -314,57 +346,60 @@
                             <div class="project-header">
                                 <h3 class="project-title">MELLOW</h3>
                                 <div class="project-status beta">
-                                    <span class="status-dot"></span>
+                                    <div class="status-indicator"></div>
                                     <span class="status-text">Beta</span>
                                 </div>
                             </div>
                             <p class="project-description">
-                                Next-generation health record system with AI diagnostics, biometric authentication, 
-                                and blockchain security. Currently in beta with 1000+ active users.
+                                Advanced health record system with AI diagnostics, biometric authentication, 
+                                and blockchain security. Currently serving 1000+ beta users.
                             </p>
                             <div class="project-features">
-                                <span class="feature-tag">🏥 Healthcare</span>
-                                <span class="feature-tag">🔒 Blockchain</span>
-                                <span class="feature-tag">🧬 Biometrics</span>
+                                <div class="feature-tag">🏥 Health Analytics</div>
+                                <div class="feature-tag">🔒 Blockchain Security</div>
+                                <div class="feature-tag">🧬 Biometric Auth</div>
+                                <div class="feature-tag">📊 AI Diagnostics</div>
                             </div>
                         </div>
                     </article>
 
-                    <article class="project-card coming-soon" data-project="next">
+                    <article class="project-card coming-soon" data-project="3" data-reveal data-tilt>
                         <div class="project-number">03</div>
                         <div class="project-image">
                             <div class="project-tech-stack">
-                                <span class="tech-item">Next.js</span>
-                                <span class="tech-item">Three.js</span>
-                                <span class="tech-item">WebGL</span>
+                                <span class="tech-badge next">Next.js</span>
+                                <span class="tech-badge three">Three.js</span>
+                                <span class="tech-badge webgl">WebGL</span>
                             </div>
                             <div class="project-overlay">
-                                <div class="coming-soon-content">
-                                    <div class="loading-animation">
-                                        <div class="loading-dot"></div>
-                                        <div class="loading-dot"></div>
-                                        <div class="loading-dot"></div>
+                                <div class="coming-soon-animation">
+                                    <div class="loading-dots">
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
                                     </div>
                                     <div class="coming-soon-text">Coming Soon</div>
+                                    <div class="eta">ETA: Q2 2025</div>
                                 </div>
                             </div>
                         </div>
                         <div class="project-content">
                             <div class="project-header">
                                 <h3 class="project-title">NEURAL CANVAS</h3>
-                                <div class="project-status dev">
-                                    <span class="status-dot"></span>
-                                    <span class="status-text">In Development</span>
+                                <div class="project-status development">
+                                    <div class="status-indicator"></div>
+                                    <span class="status-text">In Dev</span>
                                 </div>
                             </div>
                             <p class="project-description">
                                 Revolutionary 3D visualization platform combining neural networks with interactive 
-                                canvas technology. Will redefine how we interact with AI-generated content.
+                                canvas technology. Will redefine AI-content interaction.
                             </p>
                             <div class="project-features">
-                                <span class="feature-tag">🧠 Neural Networks</span>
-                                <span class="feature-tag">🎨 3D Graphics</span>
-                                <span class="feature-tag">⚡ WebGL</span>
+                                <div class="feature-tag">🧠 Neural Networks</div>
+                                <div class="feature-tag">🎨 3D Graphics</div>
+                                <div class="feature-tag">⚡ WebGL Acceleration</div>
+                                <div class="feature-tag">🎪 Interactive Canvas</div>
                             </div>
                         </div>
                     </article>
@@ -372,111 +407,139 @@
             </div>
         </section>
 
-        <!-- Enhanced Skills Section -->
+        <!-- Skills Section -->
         <section id="skills" class="skills-section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">
-                        <span class="title-bracket">function</span>
-                        Skills()
-                        <span class="title-bracket">{ }</span>
+                    <h2 class="section-title" data-reveal>
+                        <span class="title-function">function</span>
+                        <span class="title-text">getSkills</span>
+                        <span class="title-params">()</span>
+                        <span class="title-bracket"> { }</span>
                     </h2>
-                    <p class="section-subtitle">My technical arsenal for building amazing things</p>
+                    <p class="section-subtitle" data-reveal>My technical arsenal for building amazing things</p>
                 </div>
                 
-                <div class="skills-grid">
-                    <div class="skill-category frontend">
+                <div class="skills-container">
+                    <div class="skill-category frontend" data-reveal data-category="frontend">
                         <div class="category-header">
                             <div class="category-icon">🎨</div>
-                            <h3 class="category-title">Frontend</h3>
+                            <div class="category-info">
+                                <h3 class="category-title">Frontend</h3>
+                                <div class="category-description">Crafting beautiful user experiences</div>
+                            </div>
                             <div class="category-progress">
-                                <div class="progress-bar" style="--progress: 90%"></div>
+                                <div class="progress-circle" data-percentage="92">
+                                    <div class="progress-text">92%</div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skills-list">
-                            <div class="skill-item" data-skill="react">
+                        <div class="skills-grid">
+                            <div class="skill-item" data-skill="react" data-level="expert">
                                 <div class="skill-icon"><i class="devicon-react-original colored"></i></div>
                                 <div class="skill-name">React</div>
                                 <div class="skill-level">Expert</div>
+                                <div class="skill-experience">3+ years</div>
                             </div>
-                            <div class="skill-item" data-skill="next">
+                            <div class="skill-item" data-skill="nextjs" data-level="advanced">
                                 <div class="skill-icon"><i class="devicon-nextjs-original"></i></div>
                                 <div class="skill-name">Next.js</div>
                                 <div class="skill-level">Advanced</div>
+                                <div class="skill-experience">2+ years</div>
                             </div>
-                            <div class="skill-item" data-skill="typescript">
+                            <div class="skill-item" data-skill="typescript" data-level="expert">
                                 <div class="skill-icon"><i class="devicon-typescript-plain colored"></i></div>
                                 <div class="skill-name">TypeScript</div>
                                 <div class="skill-level">Expert</div>
+                                <div class="skill-experience">2.5+ years</div>
                             </div>
-                            <div class="skill-item" data-skill="javascript">
+                            <div class="skill-item" data-skill="javascript" data-level="expert">
                                 <div class="skill-icon"><i class="devicon-javascript-plain colored"></i></div>
                                 <div class="skill-name">JavaScript</div>
                                 <div class="skill-level">Expert</div>
+                                <div class="skill-experience">3+ years</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="skill-category backend">
+                    <div class="skill-category backend" data-reveal data-category="backend">
                         <div class="category-header">
                             <div class="category-icon">⚙️</div>
-                            <h3 class="category-title">Backend</h3>
+                            <div class="category-info">
+                                <h3 class="category-title">Backend</h3>
+                                <div class="category-description">Building robust server solutions</div>
+                            </div>
                             <div class="category-progress">
-                                <div class="progress-bar" style="--progress: 85%"></div>
+                                <div class="progress-circle" data-percentage="88">
+                                    <div class="progress-text">88%</div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skills-list">
-                            <div class="skill-item" data-skill="nodejs">
+                        <div class="skills-grid">
+                            <div class="skill-item" data-skill="nodejs" data-level="expert">
                                 <div class="skill-icon"><i class="devicon-nodejs-plain colored"></i></div>
                                 <div class="skill-name">Node.js</div>
                                 <div class="skill-level">Expert</div>
+                                <div class="skill-experience">3+ years</div>
                             </div>
-                            <div class="skill-item" data-skill="python">
+                            <div class="skill-item" data-skill="python" data-level="advanced">
                                 <div class="skill-icon"><i class="devicon-python-plain colored"></i></div>
                                 <div class="skill-name">Python</div>
                                 <div class="skill-level">Advanced</div>
+                                <div class="skill-experience">2+ years</div>
                             </div>
-                            <div class="skill-item" data-skill="mongodb">
+                            <div class="skill-item" data-skill="mongodb" data-level="advanced">
                                 <div class="skill-icon"><i class="devicon-mongodb-plain colored"></i></div>
                                 <div class="skill-name">MongoDB</div>
                                 <div class="skill-level">Advanced</div>
+                                <div class="skill-experience">2.5+ years</div>
                             </div>
-                            <div class="skill-item" data-skill="postgresql">
+                            <div class="skill-item" data-skill="postgresql" data-level="intermediate">
                                 <div class="skill-icon"><i class="devicon-postgresql-plain colored"></i></div>
                                 <div class="skill-name">PostgreSQL</div>
                                 <div class="skill-level">Intermediate</div>
+                                <div class="skill-experience">1.5+ years</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="skill-category tools">
+                    <div class="skill-category tools" data-reveal data-category="tools">
                         <div class="category-header">
                             <div class="category-icon">🛠️</div>
-                            <h3 class="category-title">Tools & AI</h3>
+                            <div class="category-info">
+                                <h3 class="category-title">Tools & AI</h3>
+                                <div class="category-description">Modern development ecosystem</div>
+                            </div>
                             <div class="category-progress">
-                                <div class="progress-bar" style="--progress: 80%"></div>
+                                <div class="progress-circle" data-percentage="85">
+                                    <div class="progress-text">85%</div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skills-list">
-                            <div class="skill-item" data-skill="ai">
+                        <div class="skills-grid">
+                            <div class="skill-item" data-skill="ai" data-level="advanced">
                                 <div class="skill-icon">🤖</div>
                                 <div class="skill-name">AI/ML</div>
                                 <div class="skill-level">Advanced</div>
+                                <div class="skill-experience">2+ years</div>
                             </div>
-                            <div class="skill-item" data-skill="docker">
+                            <div class="skill-item" data-skill="docker" data-level="intermediate">
                                 <div class="skill-icon"><i class="devicon-docker-plain colored"></i></div>
                                 <div class="skill-name">Docker</div>
                                 <div class="skill-level">Intermediate</div>
+                                <div class="skill-experience">1.5+ years</div>
                             </div>
-                            <div class="skill-item" data-skill="git">
+                            <div class="skill-item" data-skill="git" data-level="expert">
                                 <div class="skill-icon"><i class="devicon-git-plain colored"></i></div>
                                 <div class="skill-name">Git</div>
                                 <div class="skill-level">Expert</div>
+                                <div class="skill-experience">3+ years</div>
                             </div>
-                            <div class="skill-item" data-skill="figma">
+                            <div class="skill-item" data-skill="figma" data-level="advanced">
                                 <div class="skill-icon"><i class="devicon-figma-plain colored"></i></div>
                                 <div class="skill-name">Figma</div>
                                 <div class="skill-level">Advanced</div>
+                                <div class="skill-experience">2+ years</div>
                             </div>
                         </div>
                     </div>
@@ -484,67 +547,83 @@
             </div>
         </section>
 
-        <!-- Enhanced Contact Section -->
+        <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">
-                        <span class="title-bracket">await</span>
-                        Connect()
-                        <span class="title-bracket">;</span>
+                    <h2 class="section-title" data-reveal>
+                        <span class="title-keyword">await</span>
+                        <span class="title-text">connect</span>
+                        <span class="title-params">()</span>
+                        <span class="title-semicolon">;</span>
                     </h2>
-                    <p class="section-subtitle">Let's build something amazing together</p>
+                    <p class="section-subtitle" data-reveal>Ready to build something extraordinary together?</p>
                 </div>
                 
                 <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-card email">
-                            <div class="card-icon">📧</div>
+                    <div class="contact-cards">
+                        <div class="contact-card email" data-reveal data-tilt data-contact="email">
+                            <div class="card-glow"></div>
+                            <div class="card-icon">
+                                <span class="icon-symbol">📧</span>
+                            </div>
                             <div class="card-content">
                                 <h4 class="card-title">Email</h4>
                                 <a href="mailto:cidcodes@gmail.com" class="card-link">cidcodes@gmail.com</a>
                                 <div class="card-status">
-                                    <span class="status-dot online"></span>
-                                    <span class="status-text">Usually responds in 24h</span>
+                                    <div class="status-dot active"></div>
+                                    <span class="status-text">Usually responds within 24h</span>
                                 </div>
                             </div>
+                            <div class="card-hover-effect"></div>
                         </div>
                         
-                        <div class="contact-card linkedin">
-                            <div class="card-icon">💼</div>
+                        <div class="contact-card linkedin" data-reveal data-tilt data-contact="linkedin">
+                            <div class="card-glow"></div>
+                            <div class="card-icon">
+                                <span class="icon-symbol">💼</span>
+                            </div>
                             <div class="card-content">
                                 <h4 class="card-title">LinkedIn</h4>
-                                <a href="#" class="card-link">Connect with me</a>
+                                <a href="#" class="card-link" target="_blank">Let's connect professionally</a>
                                 <div class="card-status">
-                                    <span class="status-dot online"></span>
+                                    <div class="status-dot active"></div>
                                     <span class="status-text">Active daily</span>
                                 </div>
                             </div>
+                            <div class="card-hover-effect"></div>
                         </div>
                         
-                        <div class="contact-card github">
-                            <div class="card-icon">🐙</div>
+                        <div class="contact-card github" data-reveal data-tilt data-contact="github">
+                            <div class="card-glow"></div>
+                            <div class="card-icon">
+                                <span class="icon-symbol">🐙</span>
+                            </div>
                             <div class="card-content">
                                 <h4 class="card-title">GitHub</h4>
-                                <a href="#" class="card-link">Check my repositories</a>
+                                <a href="#" class="card-link" target="_blank">Explore my repositories</a>
                                 <div class="card-status">
-                                    <span class="status-dot online"></span>
-                                    <span class="status-text">Commits daily</span>
+                                    <div class="status-dot active"></div>
+                                    <span class="status-text">Daily commits</span>
                                 </div>
                             </div>
+                            <div class="card-hover-effect"></div>
                         </div>
                     </div>
                     
-                    <div class="contact-cta">
-                        <div class="cta-content">
-                            <h3 class="cta-title">Ready to start a project?</h3>
+                    <div class="contact-cta" data-reveal>
+                        <div class="cta-container">
+                            <h3 class="cta-title">Start Your Project</h3>
                             <p class="cta-description">
-                                Whether you have a groundbreaking idea or need help bringing your vision to life, 
-                                I'm here to help you succeed.
+                                Have an amazing idea? Let's bring it to life with cutting-edge technology 
+                                and innovative solutions.
                             </p>
-                            <a href="mailto:cidcodes@gmail.com" class="cta-button primary large">
-                                <span class="btn-text">Start Conversation</span>
-                                <span class="btn-icon">🚀</span>
+                            <a href="mailto:cidcodes@gmail.com" class="cta-button primary large" data-magnetic>
+                                <span class="btn-content">
+                                    <span class="btn-text">Start Conversation</span>
+                                    <span class="btn-icon">🚀</span>
+                                </span>
+                                <div class="btn-particles"></div>
                             </a>
                         </div>
                     </div>
@@ -553,7 +632,7 @@
         </section>
     </main>
 
-    <!-- Enhanced Footer -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -563,29 +642,28 @@
                         <span class="logo-text">SIDHARDH</span>
                         <span class="logo-bracket">/&gt;</span>
                     </div>
-                    <p class="footer-tagline">Crafting digital experiences with code and creativity</p>
+                    <p class="footer-tagline">Crafting digital experiences with passion and precision</p>
                 </div>
                 
                 <div class="footer-right">
                     <div class="social-links">
-                        <a href="#" class="social-link github">
+                        <a href="#" class="social-link" data-social="github" data-magnetic>
                             <span class="social-icon">🐙</span>
                             <span class="social-text">GitHub</span>
                         </a>
-                        <a href="#" class="social-link linkedin">
+                        <a href="#" class="social-link" data-social="linkedin" data-magnetic>
                             <span class="social-icon">💼</span>
                             <span class="social-text">LinkedIn</span>
                         </a>
-                        <a href="#" class="social-link twitter">
+                        <a href="#" class="social-link" data-social="twitter" data-magnetic>
                             <span class="social-icon">🐦</span>
                             <span class="social-text">Twitter</span>
                         </a>
                     </div>
-                    
-                    <div class="footer-bottom">
-                        <p>&copy; 2025 Sidhardh S. Made with <span class="heart">❤️</span> and lots of <span class="coffee">☕</span></p>
-                    </div>
                 </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sidhardh S. Made with <span class="heart" data-heart>❤️</span> and lots of <span class="coffee" data-coffee>☕</span></p>
             </div>
         </div>
     </footer>
