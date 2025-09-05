@@ -1,48 +1,39 @@
-// Advanced Interactive Portfolio System
+// Modern Interactive Portfolio - Complete JavaScript
 class ModernPortfolio {
     constructor() {
-        this.isInitialized = false;
+        this.isDesktop = window.innerWidth > 768;
         this.observers = new Map();
         this.animations = new Map();
-        this.currentTheme = 'cyber';
-        this.mobileBreakpoint = 768;
-        this.typingText = [
-            'Full Stack Developer',
-            'AI/ML Engineer',
-            'React Specialist',
-            'Problem Solver',
-            'Code Wizard ✨'
+        this.typingTexts = [
+            "Full Stack Developer",
+            "AI/ML Specialist", 
+            "React Enthusiast",
+            "Problem Solver",
+            "Code Wizard ✨"
         ];
-        this.currentTypeIndex = 0;
         
         this.init();
     }
 
     async init() {
-        if (this.isInitialized) return;
+        await this.waitForDOM();
         
-        try {
-            await this.waitForDOM();
-            
-            // Initialize all components
-            this.setupAdvancedLogo();
-            this.setupEnhancedNavigation();
-            this.setupHeroAnimations();
-            this.setupTypingEffect();
-            this.setupProjectInteractions();
-            this.setupSkillsSystem();
-            this.setupContactAnimations();
-            this.setupScrollEffects();
-            this.setupMobileMenu();
-            this.setupPerformanceOptimizations();
-            this.setupAdvancedBackground();
-            this.setupKeyboardShortcuts();
-            
-            this.isInitialized = true;
-            console.log('🚀 Modern Portfolio System Initialized!');
-        } catch (error) {
-            console.error('❌ Portfolio initialization failed:', error);
-        }
+        // Initialize all components
+        this.setupCustomCursor();
+        this.setupMagneticEffects();
+        this.setupNavigation();
+        this.setupHeroAnimations();
+        this.setupTypingEffect();
+        this.setupScrollAnimations();
+        this.setupProjectInteractions();
+        this.setupSkillsAnimations();
+        this.setupContactAnimations();
+        this.setupMobileMenu();
+        this.setupPerformanceOptimizations();
+        this.setupKeyboardShortcuts();
+        this.setupParticleSystem();
+        
+        console.log('🚀 Modern Portfolio initialized successfully!');
     }
 
     waitForDOM() {
@@ -55,220 +46,96 @@ class ModernPortfolio {
         });
     }
 
-    // Advanced Logo System
-    setupAdvancedLogo() {
-        const logo = document.getElementById('interactive-logo');
-        if (!logo) return;
+    // Custom Cursor System (Desktop Only)
+    setupCustomCursor() {
+        if (!this.isDesktop) return;
+        
+        this.cursor = {
+            dot: document.querySelector('[data-cursor-dot]'),
+            outline: document.querySelector('[data-cursor-outline]'),
+            position: { x: 0, y: 0 },
+            outlinePosition: { x: 0, y: 0 },
+            delay: 8,
+            isVisible: true
+        };
 
-        const letters = logo.querySelectorAll('.logo-letter');
-        let glitchTimeout;
-        let effectQueue = [];
+        if (!this.cursor.dot || !this.cursor.outline) return;
 
-        // Letter-by-letter hover effects
-        letters.forEach((letter, index) => {
-            letter.addEventListener('mouseenter', () => {
-                this.triggerLetterEffect(letter, index);
+        // Mouse movement
+        document.addEventListener('mousemove', (e) => {
+            this.cursor.position.x = e.clientX;
+            this.cursor.position.y = e.clientY;
+            this.cursor.dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        });
+
+        // Mouse states
+        document.addEventListener('mousedown', () => {
+            this.cursor.dot.style.transform += ' scale(1.5)';
+            this.cursor.outline.classList.add('hover');
+        });
+
+        document.addEventListener('mouseup', () => {
+            this.cursor.dot.style.transform = this.cursor.dot.style.transform.replace(' scale(1.5)', '');
+            this.cursor.outline.classList.remove('hover');
+        });
+
+        // Hover effects on interactive elements
+        const hoverElements = document.querySelectorAll('a, button, [data-cursor-hover]');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                this.cursor.outline.classList.add('hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                this.cursor.outline.classList.remove('hover');
             });
         });
 
-        // Logo click effects
-        logo.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.triggerLogoSequence(letters);
-        });
-
-        // Random glitch system
-        this.setupRandomGlitch(logo, letters);
-
-        // Keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.shiftKey && e.key === 'L') {
-                e.preventDefault();
-                this.triggerLogoSequence(letters);
-            }
-        });
-
-        console.log('✨ Advanced logo system activated');
+        // Animate outline following
+        this.animateCursor();
     }
 
-    triggerLetterEffect(letter, index) {
-        const effects = ['wave', 'glow', 'rotate', 'scale', 'rainbow'];
-        const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+    animateCursor() {
+        if (!this.isDesktop || !this.cursor.outline) return;
+
+        this.cursor.outlinePosition.x += (this.cursor.position.x - this.cursor.outlinePosition.x) / this.cursor.delay;
+        this.cursor.outlinePosition.y += (this.cursor.position.y - this.cursor.outlinePosition.y) / this.cursor.delay;
         
-        letter.classList.add(`effect-${randomEffect}`);
+        this.cursor.outline.style.transform = `translate(${this.cursor.outlinePosition.x}px, ${this.cursor.outlinePosition.y}px)`;
         
-        // Create ripple effect to adjacent letters
-        const adjacentIndices = [index - 1, index + 1];
-        adjacentIndices.forEach((adjIndex, delay) => {
-            setTimeout(() => {
-                const adjLetter = letter.parentElement.children[adjIndex];
-                if (adjLetter && adjLetter.classList.contains('logo-letter')) {
-                    adjLetter.style.transform = 'translateY(-3px) scale(1.05)';
-                    adjLetter.style.color = 'var(--accent)';
-                    
-                    setTimeout(() => {
-                        adjLetter.style.transform = '';
-                        adjLetter.style.color = '';
-                    }, 200);
-                }
-            }, delay * 100);
-        });
-        
-        setTimeout(() => {
-            letter.classList.remove(`effect-${randomEffect}`);
-        }, 1000);
+        requestAnimationFrame(() => this.animateCursor());
     }
 
-    triggerLogoSequence(letters) {
-        const sequence = [
-            { effect: 'matrix-rain', duration: 1000 },
-            { effect: 'glitch-wave', duration: 800 },
-            { effect: 'rainbow-cascade', duration: 1200 }
-        ];
-        
-        let currentSequence = 0;
-        
-        const runSequence = () => {
-            if (currentSequence >= sequence.length) return;
-            
-            const current = sequence[currentSequence];
-            this.applySequenceEffect(letters, current.effect);
-            
-            setTimeout(() => {
-                currentSequence++;
-                runSequence();
-            }, current.duration);
-        };
-        
-        runSequence();
-        this.createScreenEffect();
-    }
+    // Magnetic Effects (Desktop Only)
+    setupMagneticEffects() {
+        if (!this.isDesktop) return;
 
-    applySequenceEffect(letters, effect) {
-        switch (effect) {
-            case 'matrix-rain':
-                this.matrixRainEffect(letters);
-                break;
-            case 'glitch-wave':
-                this.glitchWaveEffect(letters);
-                break;
-            case 'rainbow-cascade':
-                this.rainbowCascadeEffect(letters);
-                break;
-        }
-    }
-
-    matrixRainEffect(letters) {
-        letters.forEach((letter, index) => {
-            setTimeout(() => {
-                letter.style.color = '#00ff00';
-                letter.style.textShadow = '0 0 20px #00ff00';
-                letter.style.transform = 'translateY(-10px)';
+        const magneticElements = document.querySelectorAll('[data-magnetic]');
+        
+        magneticElements.forEach(element => {
+            element.addEventListener('mousemove', (e) => {
+                const rect = element.getBoundingClientRect();
+                const x = e.clientX - (rect.left + rect.width / 2);
+                const y = e.clientY - (rect.top + rect.height / 2);
                 
-                // Add binary rain
-                this.createBinaryRain(letter);
+                const strength = element.dataset.magnetic || 0.3;
+                const moveX = x * strength;
+                const moveY = y * strength;
                 
-                setTimeout(() => {
-                    letter.style.color = '';
-                    letter.style.textShadow = '';
-                    letter.style.transform = '';
-                }, 800);
-            }, index * 100);
+                element.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) rotateX(${moveY * 0.1}deg) rotateY(${moveX * 0.1}deg)`;
+            });
+
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'translate3d(0, 0, 0) rotateX(0) rotateY(0)';
+            });
         });
-    }
-
-    createBinaryRain(element) {
-        const rect = element.getBoundingClientRect();
-        const rain = document.createElement('div');
-        
-        rain.style.cssText = `
-            position: fixed;
-            left: ${rect.left + rect.width / 2}px;
-            top: ${rect.bottom}px;
-            color: #00ff00;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            pointer-events: none;
-            z-index: 1000;
-            animation: binary-fall 1s ease-out forwards;
-        `;
-        
-        rain.textContent = Math.random().toString(2).substr(2, 8);
-        document.body.appendChild(rain);
-        
-        setTimeout(() => rain.remove(), 1000);
-    }
-
-    glitchWaveEffect(letters) {
-        letters.forEach((letter, index) => {
-            setTimeout(() => {
-                letter.classList.add('glitch-active');
-                
-                setTimeout(() => {
-                    letter.classList.remove('glitch-active');
-                }, 200);
-            }, index * 50);
-        });
-    }
-
-    rainbowCascadeEffect(letters) {
-        const colors = ['#ff0080', '#8000ff', '#0080ff', '#00ff80', '#ff8000'];
-        
-        letters.forEach((letter, index) => {
-            let colorIndex = 0;
-            const colorInterval = setInterval(() => {
-                letter.style.color = colors[colorIndex];
-                letter.style.textShadow = `0 0 20px ${colors[colorIndex]}`;
-                colorIndex = (colorIndex + 1) % colors.length;
-            }, 100);
-            
-            setTimeout(() => {
-                clearInterval(colorInterval);
-                letter.style.color = '';
-                letter.style.textShadow = '';
-            }, 1000);
-        });
-    }
-
-    createScreenEffect() {
-        const effect = document.createElement('div');
-        effect.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
-            z-index: 9999;
-            pointer-events: none;
-            animation: screen-flash 0.3s ease-out;
-        `;
-        
-        document.body.appendChild(effect);
-        setTimeout(() => effect.remove(), 300);
-    }
-
-    setupRandomGlitch(logo, letters) {
-        const triggerRandomGlitch = () => {
-            if (Math.random() < 0.08) { // 8% chance
-                const randomLetter = letters[Math.floor(Math.random() * letters.length)];
-                this.triggerLetterEffect(randomLetter, 0);
-            }
-            
-            // Next check in 8-15 seconds
-            const nextCheck = 8000 + Math.random() * 7000;
-            setTimeout(triggerRandomGlitch, nextCheck);
-        };
-        
-        setTimeout(triggerRandomGlitch, 10000);
     }
 
     // Enhanced Navigation
-    setupEnhancedNavigation() {
+    setupNavigation() {
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = document.querySelectorAll('section[id]');
         
-        // Enhanced smooth scroll
+        // Smooth scroll navigation
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -278,11 +145,11 @@ class ModernPortfolio {
             });
         });
 
-        // Advanced active section tracking
-        this.setupAdvancedSectionTracking(navLinks, sections);
+        // Active section tracking
+        this.setupSectionTracking(navLinks, sections);
         
-        // Navigation sound effects
-        this.setupNavigationSounds(navLinks);
+        // Header scroll effects
+        this.setupHeaderEffects();
     }
 
     smoothScrollToSection(sectionId) {
@@ -292,43 +159,22 @@ class ModernPortfolio {
         const headerHeight = document.querySelector('.header').offsetHeight;
         const targetPosition = section.offsetTop - headerHeight - 20;
         
-        // Enhanced easing function
-        this.smoothScrollTo(targetPosition, 1000);
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
     }
 
-    smoothScrollTo(targetPosition, duration = 800) {
-        const startPosition = window.pageYOffset;
-        const distance = targetPosition - startPosition;
-        let start = null;
-
-        const animation = (currentTime) => {
-            if (start === null) start = currentTime;
-            const timeElapsed = currentTime - start;
-            const run = this.easeInOutCubic(timeElapsed, startPosition, distance, duration);
-            window.scrollTo(0, run);
-            if (timeElapsed < duration) requestAnimationFrame(animation);
-        };
-
-        requestAnimationFrame(animation);
-    }
-
-    easeInOutCubic(t, b, c, d) {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t * t + b;
-        t -= 2;
-        return c / 2 * (t * t * t + 2) + b;
-    }
-
-    setupAdvancedSectionTracking(navLinks, sections) {
+    setupSectionTracking(navLinks, sections) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const id = entry.target.getAttribute('id');
-                    this.updateActiveNavigation(navLinks, id);
+                    this.updateActiveNavLink(navLinks, id);
                 }
             });
         }, {
-            rootMargin: '-10% 0px -80% 0px',
+            rootMargin: '-20% 0px -70% 0px',
             threshold: 0.1
         });
 
@@ -336,192 +182,193 @@ class ModernPortfolio {
         this.observers.set('navigation', observer);
     }
 
-    updateActiveNavigation(navLinks, activeId) {
+    updateActiveNavLink(navLinks, activeId) {
         navLinks.forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href') === `#${activeId}`) {
                 link.classList.add('active');
-                this.animateActiveLink(link);
             }
         });
     }
 
-    animateActiveLink(link) {
-        link.style.transform = 'scale(1.05)';
-        setTimeout(() => {
-            link.style.transform = '';
-        }, 200);
-    }
-
-    setupNavigationSounds(navLinks) {
-        navLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                // Visual feedback
-                link.style.boxShadow = '0 0 20px rgba(0, 212, 255, 0.3)';
-            });
+    setupHeaderEffects() {
+        const header = document.querySelector('.header');
+        let lastScrollY = window.pageYOffset;
+        
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.pageYOffset;
             
-            link.addEventListener('mouseleave', () => {
-                link.style.boxShadow = '';
-            });
-        });
+            // Add scrolled class
+            if (currentScrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Hide/show header
+            if (currentScrollY > lastScrollY && currentScrollY > 200) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollY = currentScrollY;
+        }, { passive: true });
     }
 
-    // Hero Animations
+    // Hero Section Animations
     setupHeroAnimations() {
-        this.setupParallaxEffects();
-        this.setupCodeEditorAnimation();
+        this.animateCounters();
         this.setupFloatingElements();
         this.setupScrollIndicator();
+        this.setupTiltEffect();
     }
 
-    setupParallaxEffects() {
-        let ticking = false;
+    animateCounters() {
+        const counters = document.querySelectorAll('[data-target]');
         
-        const updateParallax = () => {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.3;
-            
-            // Parallax for floating elements
-            const floatingElements = document.querySelectorAll('.code-element');
-            floatingElements.forEach((element, index) => {
-                const speed = 0.1 + (index * 0.05);
-                element.style.transform += ` translateY(${rate * speed}px)`;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.dataset.target);
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += step;
+                        if (current >= target) {
+                            counter.textContent = target + '+';
+                        } else {
+                            counter.textContent = Math.ceil(current);
+                        }
+                        if (current < target) {
+                            requestAnimationFrame(updateCounter);
+                        }
+                    };
+                    
+                    updateCounter();
+                    observer.unobserve(counter);
+                }
             });
-            
-            ticking = false;
-        };
+        }, { threshold: 0.5 });
         
-        const requestTick = () => {
-            if (!ticking) {
-                requestAnimationFrame(updateParallax);
-                ticking = true;
-            }
-        };
-        
-        window.addEventListener('scroll', requestTick, { passive: true });
-    }
-
-    setupCodeEditorAnimation() {
-        const codeLines = document.querySelectorAll('.code-line');
-        
-        codeLines.forEach((line, index) => {
-            setTimeout(() => {
-                line.style.opacity = '0';
-                line.style.transform = 'translateX(-20px)';
-                line.style.transition = 'all 0.5s ease';
-                
-                setTimeout(() => {
-                    line.style.opacity = '1';
-                    line.style.transform = 'translateX(0)';
-                }, index * 200);
-            }, 1000);
-        });
+        counters.forEach(counter => observer.observe(counter));
     }
 
     setupFloatingElements() {
-        const elements = document.querySelectorAll('.code-element');
+        const floatingElements = document.querySelectorAll('.code-element');
         
-        elements.forEach(element => {
+        floatingElements.forEach((element, index) => {
+            // Add click interactions
             element.addEventListener('click', () => {
-                this.triggerElementInteraction(element);
+                this.triggerElementEffect(element, index);
             });
             
+            // Hover effects
             element.addEventListener('mouseenter', () => {
                 element.style.animationPlayState = 'paused';
-                element.style.transform = 'scale(1.1) translateZ(0)';
+                element.style.transform += ' scale(1.1)';
                 element.style.zIndex = '10';
             });
             
             element.addEventListener('mouseleave', () => {
                 element.style.animationPlayState = 'running';
-                element.style.transform = '';
+                element.style.transform = element.style.transform.replace(' scale(1.1)', '');
                 element.style.zIndex = '';
             });
         });
     }
 
-    triggerElementInteraction(element) {
-        const elementType = element.className.split(' ')[1];
+    triggerElementEffect(element, index) {
+        // Create ripple effect
+        const ripple = document.createElement('div');
+        ripple.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.6), transparent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: ripple-expand 0.6s ease-out;
+            pointer-events: none;
+            z-index: 1000;
+        `;
         
-        switch (elementType) {
-            case 'terminal-window':
-                this.showTerminalOutput(element);
-                break;
-            case 'code-snippet':
-                this.expandCodeSnippet(element);
-                break;
-            case 'git-badge':
-                this.showGitAction(element);
-                break;
-            case 'api-call':
-                this.simulateAPICall(element);
-                break;
-            default:
-                this.createGenericEffect(element);
+        element.style.position = 'relative';
+        element.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
+        
+        // Show contextual message
+        this.showFloatingMessage(element, this.getElementMessage(element));
+    }
+
+    getElementMessage(element) {
+        if (element.classList.contains('terminal-window')) {
+            return '✅ Server running smoothly';
+        } else if (element.classList.contains('api-response')) {
+            return '📡 API responding perfectly';
+        } else if (element.classList.contains('git-commit')) {
+            return '🔀 Changes committed successfully';
+        } else if (element.classList.contains('react-component')) {
+            return '⚛️ Component rendered';
+        } else {
+            return '💻 System operational';
         }
     }
 
-    showTerminalOutput(element) {
-        const outputs = [
-            '✅ Server started on port 3000',
-            '🚀 Build completed successfully',
-            '📦 Dependencies installed',
-            '🔥 Hot reload enabled',
-            '✨ Ready to code!'
-        ];
-        
-        const output = outputs[Math.floor(Math.random() * outputs.length)];
-        this.showFloatingMessage(element, output, 'success');
-    }
-
-    showFloatingMessage(element, message, type = 'info') {
-        const messageElement = document.createElement('div');
-        messageElement.textContent = message;
-        messageElement.style.cssText = `
+    showFloatingMessage(element, message) {
+        const messageEl = document.createElement('div');
+        messageEl.textContent = message;
+        messageEl.style.cssText = `
             position: fixed;
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-primary);
-            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--primary);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
             z-index: 1000;
             pointer-events: none;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.3s ease;
-            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(10px);
         `;
         
         const rect = element.getBoundingClientRect();
-        messageElement.style.left = `${rect.left}px`;
-        messageElement.style.top = `${rect.top - 60}px`;
+        messageEl.style.left = `${rect.left + rect.width / 2}px`;
+        messageEl.style.top = `${rect.top - 50}px`;
+        messageEl.style.transform += ' translateX(-50%)';
         
-        document.body.appendChild(messageElement);
+        document.body.appendChild(messageEl);
+        
+        requestAnimationFrame(() => {
+            messageEl.style.opacity = '1';
+            messageEl.style.transform = messageEl.style.transform.replace('translateY(20px)', 'translateY(0)');
+        });
         
         setTimeout(() => {
-            messageElement.style.opacity = '1';
-            messageElement.style.transform = 'translateY(0)';
-        }, 10);
-        
-        setTimeout(() => {
-            messageElement.style.opacity = '0';
-            messageElement.style.transform = 'translateY(-20px)';
-            setTimeout(() => messageElement.remove(), 300);
-        }, 3000);
+            messageEl.style.opacity = '0';
+            messageEl.style.transform += ' translateY(-20px)';
+            setTimeout(() => messageEl.remove(), 300);
+        }, 2500);
     }
 
     setupScrollIndicator() {
-        const indicator = document.querySelector('.scroll-indicator');
+        const indicator = document.getElementById('scroll-indicator');
         if (!indicator) return;
         
         indicator.addEventListener('click', () => {
             this.smoothScrollToSection('projects');
         });
         
-        // Hide indicator after first scroll
+        // Hide after first scroll
         let hasScrolled = false;
         window.addEventListener('scroll', () => {
             if (!hasScrolled && window.pageYOffset > 100) {
@@ -529,6 +376,28 @@ class ModernPortfolio {
                 indicator.style.opacity = '0';
                 indicator.style.pointerEvents = 'none';
             }
+        });
+    }
+
+    setupTiltEffect() {
+        const tiltElements = document.querySelectorAll('[data-tilt]');
+        
+        tiltElements.forEach(element => {
+            element.addEventListener('mousemove', (e) => {
+                const rect = element.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const mouseX = e.clientX - centerX;
+                const mouseY = e.clientY - centerY;
+                const rotateX = (mouseY / (rect.height / 2)) * 10;
+                const rotateY = (mouseX / (rect.width / 2)) * -10;
+                
+                element.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = '';
+            });
         });
     }
 
@@ -542,7 +411,7 @@ class ModernPortfolio {
         let isDeleting = false;
         
         const typeText = () => {
-            const currentText = this.typingText[currentIndex];
+            const currentText = this.typingTexts[currentIndex];
             
             if (isDeleting) {
                 typingElement.textContent = currentText.substring(0, currentChar - 1);
@@ -555,19 +424,51 @@ class ModernPortfolio {
             let typeSpeed = isDeleting ? 50 : 100;
             
             if (!isDeleting && currentChar === currentText.length) {
-                typeSpeed = 2000; // Pause at end
+                typeSpeed = 2000;
                 isDeleting = true;
             } else if (isDeleting && currentChar === 0) {
                 isDeleting = false;
-                currentIndex = (currentIndex + 1) % this.typingText.length;
-                typeSpeed = 500; // Pause before starting new text
+                currentIndex = (currentIndex + 1) % this.typingTexts.length;
+                typeSpeed = 500;
             }
             
             setTimeout(typeText, typeSpeed);
         };
         
-        // Start typing after a delay
-        setTimeout(typeText, 2000);
+        setTimeout(typeText, 1500);
+    }
+
+    // Scroll Animations
+    setupScrollAnimations() {
+        const revealElements = document.querySelectorAll('[data-reveal]');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    
+                    // Staggered animation for child elements
+                    const children = entry.target.querySelectorAll('.skill-item, .project-card, .contact-card');
+                    children.forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.opacity = '1';
+                            child.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        revealElements.forEach(el => {
+            observer.observe(el);
+        });
+        
+        this.observers.set('reveal', observer);
     }
 
     // Project Interactions
@@ -575,88 +476,71 @@ class ModernPortfolio {
         const projectCards = document.querySelectorAll('.project-card');
         
         projectCards.forEach((card, index) => {
-            this.enhanceProjectCard(card, index);
-        });
-        
-        // Setup project filters (if needed)
-        this.setupProjectFilters();
-    }
-
-    enhanceProjectCard(card, index) {
-        // Enhanced hover effects
-        card.addEventListener('mouseenter', () => {
-            this.animateProjectEntry(card);
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            this.animateProjectExit(card);
-        });
-        
-        // Click ripple effect
-        card.addEventListener('click', (e) => {
-            if (!e.target.closest('.project-link')) {
-                this.createAdvancedRipple(e, card);
-            }
-        });
-        
-        // Intersection observer for entrance animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, index * 200);
-                    observer.unobserve(entry.target);
+            // Enhanced hover effects
+            card.addEventListener('mouseenter', () => {
+                this.animateProjectCard(card, true);
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                this.animateProjectCard(card, false);
+            });
+            
+            // Click effects
+            card.addEventListener('click', (e) => {
+                if (!e.target.closest('.project-link')) {
+                    this.createProjectRipple(e, card);
                 }
             });
-        }, { threshold: 0.1 });
-        
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(50px)';
-        card.style.transition = 'all 0.6s ease';
-        observer.observe(card);
+        });
     }
 
-    animateProjectEntry(card) {
-        const techItems = card.querySelectorAll('.tech-item');
+    animateProjectCard(card, isEntering) {
+        const techBadges = card.querySelectorAll('.tech-badge');
         const featureTags = card.querySelectorAll('.feature-tag');
+        const projectNumber = card.querySelector('.project-number');
         
-        techItems.forEach((item, index) => {
-            setTimeout(() => {
-                item.style.transform = 'scale(1.05)';
-                item.style.background = 'rgba(0, 212, 255, 0.2)';
-            }, index * 100);
-        });
-        
-        featureTags.forEach((tag, index) => {
-            setTimeout(() => {
-                tag.style.transform = 'translateY(-2px)';
-                tag.style.boxShadow = '0 5px 15px rgba(139, 92, 246, 0.3)';
-            }, index * 50);
-        });
+        if (isEntering) {
+            techBadges.forEach((badge, index) => {
+                setTimeout(() => {
+                    badge.style.transform = 'translateY(-3px) scale(1.05)';
+                    badge.style.boxShadow = '0 5px 15px rgba(0, 212, 255, 0.3)';
+                }, index * 50);
+            });
+            
+            featureTags.forEach((tag, index) => {
+                setTimeout(() => {
+                    tag.style.transform = 'translateY(-2px)';
+                    tag.style.boxShadow = '0 3px 10px rgba(139, 92, 246, 0.3)';
+                }, index * 30);
+            });
+            
+            if (projectNumber) {
+                projectNumber.style.transform = 'scale(1.1)';
+                projectNumber.style.opacity = '0.1';
+            }
+        } else {
+            techBadges.forEach(badge => {
+                badge.style.transform = '';
+                badge.style.boxShadow = '';
+            });
+            
+            featureTags.forEach(tag => {
+                tag.style.transform = '';
+                tag.style.boxShadow = '';
+            });
+            
+            if (projectNumber) {
+                projectNumber.style.transform = '';
+                projectNumber.style.opacity = '';
+            }
+        }
     }
 
-    animateProjectExit(card) {
-        const techItems = card.querySelectorAll('.tech-item');
-        const featureTags = card.querySelectorAll('.feature-tag');
-        
-        techItems.forEach(item => {
-            item.style.transform = '';
-            item.style.background = '';
-        });
-        
-        featureTags.forEach(tag => {
-            tag.style.transform = '';
-            tag.style.boxShadow = '';
-        });
-    }
-
-    createAdvancedRipple(e, card) {
+    createProjectRipple(e, card) {
         const rect = card.getBoundingClientRect();
         const ripple = document.createElement('div');
         
-        const size = Math.max(rect.width, rect.height) * 1.5;
+        const size = Math.max(rect.width, rect.height);
         const x = e.clientX - rect.left - size / 2;
         const y = e.clientY - rect.top - size / 2;
         
@@ -669,7 +553,7 @@ class ModernPortfolio {
             background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
             border-radius: 50%;
             transform: scale(0);
-            animation: advanced-ripple 0.8s ease-out;
+            animation: ripple-expand 0.8s ease-out;
             pointer-events: none;
             z-index: 10;
         `;
@@ -684,104 +568,73 @@ class ModernPortfolio {
         }, 800);
     }
 
-    setupProjectFilters() {
-        // Implementation for project filtering if needed
-        console.log('Project filters ready');
-    }
-
-    // Skills System
-    setupSkillsSystem() {
+    // Skills Animations
+    setupSkillsAnimations() {
         const skillItems = document.querySelectorAll('.skill-item');
-        const categories = document.querySelectorAll('.skill-category');
+        const progressCircles = document.querySelectorAll('.progress-circle');
         
-        // Animate skill items on scroll
+        // Skill item interactions
         skillItems.forEach((item, index) => {
-            this.setupSkillItemAnimation(item, index);
+            item.addEventListener('mouseenter', () => {
+                this.animateSkillItem(item, true);
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                this.animateSkillItem(item, false);
+            });
+            
+            item.addEventListener('click', () => {
+                this.showSkillDetails(item);
+            });
+            
+            // Entrance animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.6s ease';
+            observer.observe(item);
         });
         
-        // Category animations
-        categories.forEach(category => {
-            this.setupCategoryAnimation(category);
-        });
-        
-        // Progress bar animations
-        this.setupProgressAnimations();
-    }
-
-    setupSkillItemAnimation(item, index) {
-        const observer = new IntersectionObserver((entries) => {
+        // Progress circle animations
+        const progressObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0) scale(1)';
-                    }, index * 100);
-                    observer.unobserve(entry.target);
+                    this.animateProgressCircle(entry.target);
+                    progressObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.5 });
         
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(30px) scale(0.9)';
-        item.style.transition = 'all 0.5s ease';
-        observer.observe(item);
-        
-        // Enhanced interactions
-        item.addEventListener('click', () => {
-            this.showSkillDetails(item);
-        });
-        
-        item.addEventListener('mouseenter', () => {
-            this.animateSkillHover(item);
-        });
-        
-        item.addEventListener('mouseleave', () => {
-            this.resetSkillHover(item);
+        progressCircles.forEach(circle => {
+            progressObserver.observe(circle);
         });
     }
 
-    showSkillDetails(item) {
-        const skillName = item.querySelector('.skill-name').textContent;
-        const skillLevel = item.querySelector('.skill-level').textContent;
-        
-        const details = this.getSkillDetails(skillName);
-        this.showFloatingMessage(item, `${skillName}: ${details}`, 'info');
-    }
-
-    getSkillDetails(skillName) {
-        const skillData = {
-            'React': '3+ years experience, Hooks, Context, Redux',
-            'Node.js': 'Express, MongoDB, RESTful APIs, Microservices',
-            'Python': 'Django, FastAPI, ML libraries, Data Analysis',
-            'TypeScript': 'Strong typing, Advanced patterns, React integration',
-            'AI/ML': 'TensorFlow, PyTorch, Computer Vision, NLP',
-            'Docker': 'Containerization, Orchestration, CI/CD',
-            'Git': 'Advanced workflows, Branch management, Team collaboration',
-            'JavaScript': 'ES6+, Async/Await, Modern frameworks'
-        };
-        
-        return skillData[skillName] || 'Passionate about this technology!';
-    }
-
-    animateSkillHover(item) {
+    animateSkillItem(item, isEntering) {
         const icon = item.querySelector('.skill-icon');
         const name = item.querySelector('.skill-name');
         
-        icon.style.transform = 'scale(1.3) rotate(5deg)';
-        name.style.color = 'var(--primary)';
-        item.style.background = 'rgba(0, 212, 255, 0.1)';
-        
-        // Create floating particles
-        this.createSkillParticles(item);
-    }
-
-    resetSkillHover(item) {
-        const icon = item.querySelector('.skill-icon');
-        const name = item.querySelector('.skill-name');
-        
-        icon.style.transform = '';
-        name.style.color = '';
-        item.style.background = '';
+        if (isEntering) {
+            icon.style.transform = 'scale(1.3) rotateY(10deg)';
+            name.style.color = 'var(--primary)';
+            
+            // Create floating particles
+            this.createSkillParticles(item);
+        } else {
+            icon.style.transform = '';
+            name.style.color = '';
+        }
     }
 
     createSkillParticles(item) {
@@ -808,33 +661,33 @@ class ModernPortfolio {
         }
     }
 
-    setupCategoryAnimation(category) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
+    animateProgressCircle(circle) {
+        const percentage = parseInt(circle.dataset.percentage);
+        let currentPercentage = 0;
         
-        observer.observe(category);
+        const animate = () => {
+            if (currentPercentage <= percentage) {
+                circle.style.background = `conic-gradient(
+                    var(--primary) 0deg,
+                    var(--primary) ${currentPercentage * 3.6}deg,
+                    var(--bg-secondary) ${currentPercentage * 3.6}deg,
+                    var(--bg-secondary) 360deg
+                )`;
+                currentPercentage++;
+                requestAnimationFrame(animate);
+            }
+        };
+        
+        animate();
     }
 
-    setupProgressAnimations() {
-        const progressBars = document.querySelectorAll('.progress-bar');
+    showSkillDetails(item) {
+        const skillName = item.querySelector('.skill-name').textContent;
+        const skillLevel = item.querySelector('.skill-level').textContent;
+        const skillExperience = item.querySelector('.skill-experience')?.textContent || '';
         
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const bar = entry.target;
-                    bar.style.animation = 'progress-fill 2s ease-out';
-                    observer.unobserve(bar);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        progressBars.forEach(bar => observer.observe(bar));
+        const details = `${skillName} - ${skillLevel} ${skillExperience}`;
+        this.showFloatingMessage(item, details);
     }
 
     // Contact Animations
@@ -843,11 +696,11 @@ class ModernPortfolio {
         
         contactCards.forEach((card, index) => {
             card.addEventListener('mouseenter', () => {
-                this.animateContactCard(card);
+                this.animateContactCard(card, true);
             });
             
             card.addEventListener('mouseleave', () => {
-                this.resetContactCard(card);
+                this.animateContactCard(card, false);
             });
             
             // Entrance animation
@@ -861,35 +714,39 @@ class ModernPortfolio {
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.5 });
+            }, { threshold: 0.3 });
             
             card.style.opacity = '0';
-            card.style.transform = 'translateX(-50px)';
-            card.style.transition = 'all 0.6s ease';
+            card.style.transform = 'translateX(-30px)';
+            card.style.transition = 'all 0.8s ease';
             observer.observe(card);
         });
     }
 
-    animateContactCard(card) {
+    animateContactCard(card, isEntering) {
         const icon = card.querySelector('.card-icon');
         const statusDot = card.querySelector('.status-dot');
+        const glow = card.querySelector('.card-glow');
         
-        icon.style.transform = 'scale(1.1) rotate(5deg)';
-        if (statusDot) {
-            statusDot.style.animation = 'status-pulse 0.5s infinite';
-        }
-        
-        // Create connection lines effect
-        this.createConnectionEffect(card);
-    }
-
-    resetContactCard(card) {
-        const icon = card.querySelector('.card-icon');
-        const statusDot = card.querySelector('.status-dot');
-        
-        icon.style.transform = '';
-        if (statusDot) {
-            statusDot.style.animation = '';
+        if (isEntering) {
+            icon.style.transform = 'scale(1.1) rotateZ(5deg)';
+            if (statusDot) {
+                statusDot.style.animation = 'status-pulse 0.5s infinite';
+            }
+            if (glow) {
+                glow.style.opacity = '1';
+            }
+            
+            // Create connection effect
+            this.createConnectionEffect(card);
+        } else {
+            icon.style.transform = '';
+            if (statusDot) {
+                statusDot.style.animation = '';
+            }
+            if (glow) {
+                glow.style.opacity = '';
+            }
         }
     }
 
@@ -913,21 +770,365 @@ class ModernPortfolio {
         setTimeout(() => line.remove(), 500);
     }
 
-    // Advanced Background
-    setupAdvancedBackground() {
-        this.createMatrixEffect();
-        this.createNeuralNetwork();
-        this.setupBackgroundInteractivity();
+    // Mobile Menu
+    setupMobileMenu() {
+        const menuBtn = document.getElementById('mobile-menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        if (!menuBtn || !navMenu) return;
+        
+        this.mobileMenu = {
+            isOpen: false,
+            toggle: (forceState) => {
+                const newState = forceState !== undefined ? forceState : !this.mobileMenu.isOpen;
+                this.mobileMenu.isOpen = newState;
+                
+                if (newState) {
+                    navMenu.classList.add('active');
+                    menuBtn.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    navMenu.classList.remove('active');
+                    menuBtn.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+        };
+        
+        menuBtn.addEventListener('click', () => {
+            this.mobileMenu.toggle();
+        });
+        
+        // Close on nav link click
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                this.mobileMenu.toggle(false);
+            });
+        });
+        
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            if (this.mobileMenu.isOpen && !navMenu.contains(e.target) && e.target !== menuBtn) {
+                this.mobileMenu.toggle(false);
+            }
+        });
+        
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.mobileMenu.isOpen) {
+                this.mobileMenu.toggle(false);
+            }
+        });
     }
 
-    createMatrixEffect() {
-        const matrixContainer = document.querySelector('.matrix-rain');
-        if (!matrixContainer) return;
+    closeMobileMenu() {
+        if (this.mobileMenu) {
+            this.mobileMenu.toggle(false);
+        }
+    }
+
+    // Performance Optimizations
+    setupPerformanceOptimizations() {
+        // Pause animations when page is not visible
+        document.addEventListener('visibilitychange', () => {
+            const isHidden = document.hidden;
+            const animatedElements = document.querySelectorAll('.code-element, .floating-shapes');
+            
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = isHidden ? 'paused' : 'running';
+            });
+        });
         
-        const characters = '01';
-        const columns = Math.floor(window.innerWidth / 20);
+        // Throttle scroll events
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
         
-        for (let i = 0; i < columns; i++) {
-            const column = document.createElement('div');
-            column.style.cssText = `
-                position
+        // Preload critical resources
+        this.preloadResources();
+    }
+
+    preloadResources() {
+        const criticalResources = [
+            '/styles.css',
+            '/fluid.js'
+        ];
+        
+        criticalResources.forEach(resource => {
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = resource;
+            document.head.appendChild(link);
+        });
+    }
+
+    // Keyboard Shortcuts
+    setupKeyboardShortcuts() {
+        document.addEventListener('keydown', (e) => {
+            // Global shortcuts
+            if (e.ctrlKey || e.metaKey) {
+                switch (e.key) {
+                    case 'k': // Ctrl/Cmd + K for navigation
+                        e.preventDefault();
+                        this.openQuickNavigation();
+                        break;
+                }
+            }
+            
+            // Section shortcuts
+            if (e.altKey) {
+                switch (e.key) {
+                    case '1':
+                        this.smoothScrollToSection('about');
+                        break;
+                    case '2':
+                        this.smoothScrollToSection('projects');
+                        break;
+                    case '3':
+                        this.smoothScrollToSection('skills');
+                        break;
+                    case '4':
+                        this.smoothScrollToSection('contact');
+                        break;
+                }
+            }
+        });
+    }
+
+    openQuickNavigation() {
+        // Create quick navigation overlay
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        `;
+        
+        const menu = document.createElement('div');
+        menu.innerHTML = `
+            <div style="background: var(--bg-card); padding: 2rem; border-radius: 16px; border: 1px solid var(--border-primary);">
+                <h3 style="color: var(--text-primary); margin-bottom: 1rem; text-align: center;">Quick Navigation</h3>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <button data-nav="about" style="background: transparent; border: 1px solid var(--border-primary); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;">About</button>
+                    <button data-nav="projects" style="background: transparent; border: 1px solid var(--border-primary); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;">Projects</button>
+                    <button data-nav="skills" style="background: transparent; border: 1px solid var(--border-primary); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;">Skills</button>
+                    <button data-nav="contact" style="background: transparent; border: 1px solid var(--border-primary); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;">Contact</button>
+                </div>
+            </div>
+        `;
+        
+        overlay.appendChild(menu);
+        document.body.appendChild(overlay);
+        
+        // Handle navigation
+        menu.addEventListener('click', (e) => {
+            if (e.target.dataset.nav) {
+                this.smoothScrollToSection(e.target.dataset.nav);
+                overlay.remove();
+            }
+        });
+        
+        // Close on outside click or escape
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) overlay.remove();
+        });
+        
+        document.addEventListener('keydown', function escHandler(e) {
+            if (e.key === 'Escape') {
+                overlay.remove();
+                document.removeEventListener('keydown', escHandler);
+            }
+        });
+    }
+
+    // Particle System
+    setupParticleSystem() {
+        const particleContainer = document.getElementById('particles');
+        if (!particleContainer || !this.isDesktop) return;
+        
+        this.particles = [];
+        this.particleCount = 50;
+        
+        for (let i = 0; i < this.particleCount; i++) {
+            this.createParticle(particleContainer);
+        }
+        
+        this.animateParticles();
+    }
+
+    createParticle(container) {
+        const particle = document.createElement('div');
+        particle.style.cssText = `
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: ${Math.random() * 0.5 + 0.3};
+            left: ${Math.random() * window.innerWidth}px;
+            top: ${Math.random() * window.innerHeight}px;
+        `;
+        
+        const particleData = {
+            element: particle,
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            opacity: Math.random() * 0.5 + 0.3
+        };
+        
+        this.particles.push(particleData);
+        container.appendChild(particle);
+    }
+
+    animateParticles() {
+        this.particles.forEach(particle => {
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            
+            // Boundary checking
+            if (particle.x < 0 || particle.x > window.innerWidth) particle.vx *= -1;
+            if (particle.y < 0 || particle.y > window.innerHeight) particle.vy *= -1;
+            
+            particle.element.style.left = `${particle.x}px`;
+            particle.element.style.top = `${particle.y}px`;
+        });
+        
+        requestAnimationFrame(() => this.animateParticles());
+    }
+
+    // Public API Methods
+    scrollToSection(sectionId) {
+        this.smoothScrollToSection(sectionId);
+    }
+
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-primary);
+            backdrop-filter: blur(20px);
+            z-index: 10000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            max-width: 300px;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+        
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    // Cleanup
+    destroy() {
+        this.observers.forEach(observer => observer.disconnect());
+        this.observers.clear();
+        
+        this.animations.forEach(animation => {
+            if (animation.cancel) animation.cancel();
+        });
+        this.animations.clear();
+        
+        console.log('Portfolio destroyed');
+    }
+}
+
+// CSS Animations
+const additionalStyles = `
+@keyframes ripple-expand {
+    to {
+        transform: translate(-50%, -50%) scale(50);
+        opacity: 0;
+    }
+}
+
+@keyframes particle-float {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes connection-expand {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 100px;
+        opacity: 0;
+    }
+}
+
+.cursor-down {
+    transform: scale(0.5) !important;
+}
+
+.cursor-outline-down,
+.cursor-outline.hover {
+    width: 50px !important;
+    height: 50px !important;
+    border-color: var(--secondary) !important;
+}
+`;
+
+// Inject styles
+const styleSheet = document.createElement('style');
+styleSheet.textContent = additionalStyles;
+document.head.appendChild(styleSheet);
+
+// Initialize Portfolio
+let portfolioInstance;
+
+document.addEventListener('DOMContentLoaded', () => {
+    portfolioInstance = new ModernPortfolio();
+    window.portfolio = portfolioInstance; // Global access for debugging
+});
+
+// Error handling
+window.addEventListener('error', (event) => {
+    console.warn('⚠️ Error caught:', event.error);
+    // Continue execution gracefully
+});
+
+console.log('🚀 Modern Interactive Portfolio Script Loaded!');
+
+// Export for module systems
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { ModernPortfolio };
+} else if (typeof define === 'function' && define.amd) {
+    define(() => ({ ModernPortfolio }));
+}
